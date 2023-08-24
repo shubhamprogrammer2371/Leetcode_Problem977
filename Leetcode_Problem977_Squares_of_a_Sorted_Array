@@ -1,0 +1,57 @@
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+
+int cmpfunc(const void* a , const void* b)
+{
+    return (*(int*)a - *(int*)b);
+}
+int* sortedSquares(int* nums, int numsSize, int* returnSize){
+    int* ans = (int*)malloc(numsSize*sizeof(int));
+    *returnSize = 0;
+    for( int i = 0 ; i < numsSize ; i++)
+        ans[(*returnSize)++] = nums[i]*nums[i];
+    qsort(ans,numsSize,sizeof(int),cmpfunc);
+    return ans;
+}
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+
+int cmpfunc(const void* a , const void* b)
+{
+    return (*(int*)a - *(int*)b);
+}
+int* sortedSquares(int* nums, int numsSize, int* returnSize){
+    *returnSize = numsSize;
+    for( int i = 0 ; i < numsSize ; i++)
+        nums[i] = nums[i]*nums[i];
+    qsort(nums,numsSize,sizeof(int),cmpfunc);
+    return nums;
+}
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+
+int* sortedSquares(int* nums, int numsSize, int* returnSize)
+{
+    int *res = malloc(sizeof(nums[0]) * numsSize);
+    int start = 0 , end = numsSize - 1 ;
+    *returnSize = numsSize - 1;
+    while (start <= end)
+    {
+        res[(*returnSize)--] = (nums[start] * nums[start]) > (nums[end] * nums[end]) ? nums[start] * nums[start++] : nums[end] * nums[end--];
+    }
+    *returnSize = numsSize;
+    return res;
+}
